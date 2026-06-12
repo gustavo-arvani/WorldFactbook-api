@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import './app.css'
 
 function App(){
 
@@ -23,16 +24,33 @@ function App(){
   
 
   return(
-    <div className="container">
-      <h1>Dados dos Países</h1>
-      {countries.map((item)=>{
-        return(
-          <article key={item.id}>
-            <strong>{item.name}</strong>
-            <p>Capital: {item.capital}</p>
-          </article>
-        )
-      })}
+    <div className="container-all">
+      <div className="top">
+        <h1>Dados dos Países 🌍</h1>
+        <p>Última atualização dos dados da api: 02/2026</p>
+      </div>
+      <div className="container">
+        {countries.map((item, index)=>{
+          return(
+            <article key={index}>
+              <div className="card">
+              <strong className="title">{item.name}</strong>
+                <ul>
+                  {item.capital && (
+                    <li><strong>Capital:</strong> {item.capital}</li>
+                  )}
+                  <li><strong>Região:</strong> {item.region}</li>
+                  <li><strong>População:</strong> {item.population}</li>
+                  {item.gdp && (
+                    <li><strong>PIB:</strong> {item.gdp}</li>
+                  )}
+                </ul>
+                <a href={`https://en.wikipedia.org/wiki/${item.name}`} target="blank">Mais informações</a>
+              </div>
+            </article>
+          )
+        })}
+      </div>
     </div>
   )
 }
